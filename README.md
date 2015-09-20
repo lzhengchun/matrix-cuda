@@ -41,6 +41,7 @@ As you can see from the test results, tiled version has a much better sppedup th
 
 (1) further optimization, especially the "computation-to-memory ratio" for non square matrix
 
+(2) solve shared Mem Bank conflict issue and Global Mem Not coalesced issue
 
 
 
