@@ -118,15 +118,45 @@ __global__ void gpu_square_matrix_mult(int *d_a, int *d_b, int *d_result, int n)
 
 /*
 *********************************************************************
+function name: gpu_matrix_transpose
+
+description: matrix transpose
+
+parameters: 
+            &mat_in GPU device pointer to a rows X cols matrix
+            &mat_out GPU device output purpose pointer to a cols X rows matrix 
+            to store the result
+Note:
+    grid and block should be configured as:
+        dim3 dim_grid((n - 1) / BLOCK_SIZE + 1, (n - 1) / BLOCK_SIZE + 1, 1);
+        dim3 dim_block(BLOCK_SIZE, BLOCK_SIZE, 1);
+
+return: none
+*********************************************************************
+*/
+__global__ void gpu_matrix_transpose(int* mat_in, int* mat_out, unsigned int rows, unsigned int cols) 
+{
+    unsigned int idx = blockIdx.x * blockDim.x + threadIdx.x;
+    unsigned int idy = blockIdx.y * blockDim.y + threadIdx.y;
+
+    if (idx < cols && idy < rows) 
+    {
+        unsigned int pos = idy * cols + idx;
+        unsigned int trans_pos = idx * rows + idy;
+        mat_out[trans_pos] = mat_in[pos];
+    }
+}
+/*
+*********************************************************************
 function name: cpu_matrix_mult
 
 description: dot product of two matrix (not only square) in CPU, 
 			 for validating GPU results
 
 parameters: 
-            &a CPU device pointer to a m X n matrix (A)
-            &b CPU device pointer to a n X k matrix (B)
-            &c CPU device output purpose pointer to a m X k matrix (C) 
+            &a CPU host pointer to a m X n matrix (A)
+            &b CPU host pointer to a n X k matrix (B)
+            &c CPU host output purpose pointer to a m X k matrix (C) 
             to store the result
 return: none
 *********************************************************************
