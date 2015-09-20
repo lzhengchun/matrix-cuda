@@ -27,7 +27,9 @@ Time elapsed on matrix multiplication of 1024x1024 . 1024x1023 on CPU: 8964.3535
 
 all results are correct!!!, speedup = **175.286057**
 
+======
 tests were carried out on a Tesla M2075 card
+======
 
 #Notes
 
