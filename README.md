@@ -3,6 +3,8 @@ matrix multiplication in CUDA, this is a toy program for learning CUDA, some fun
 
 
 # test results
+#### following tests were carried out on a Tesla M2075 card
+
 [lzhengchun@clus10 liu]$ ./a.out 
 
 please type in m n and k
@@ -26,10 +28,6 @@ Time elapsed on matrix multiplication of 1024x1024 . 1024x1023 on GPU: 51.141281
 Time elapsed on matrix multiplication of 1024x1024 . 1024x1023 on CPU: 8964.353516 ms.
 
 all results are correct!!!, speedup = **175.286057**
-
-======
-tests were carried out on a Tesla M2075 card
-======
 
 #Notes
 
