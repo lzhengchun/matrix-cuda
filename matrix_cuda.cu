@@ -1,6 +1,5 @@
 /*
- *  matrix.cu
- *
+ *  file name: matrix.cu
  *
  *  matrix.cu contains the code that realize some common used matrix operations in CUDA
  *  
