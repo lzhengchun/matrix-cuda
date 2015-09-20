@@ -27,6 +27,8 @@ Time elapsed on matrix multiplication of 1024x1024 . 1024x1023 on CPU: 8964.3535
 
 all results are correct!!!, speedup = **175.286057**
 
+tests were carried out on a Tesla M2075 card
+
 #Notes
 
 (1) function *gpu_matrix_mult*: A naive implementation on GPUs assigns one thread to compute one element of matrix C. Each thread loads one row of matrix A and one column of matrix B from global memory, do the inner product, and store the result back to matrix C in the global memory. In the naive implementation, the amount of computation is 2 x M x N x K flop, while the amount of global memory access is 2 x M x N x K word. The "computation-to-memory ratio" is approximately 1/4 (flop/byte). Therefore, the naive implementation is bandwidth bounded.
