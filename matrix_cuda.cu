@@ -25,11 +25,11 @@ parameters:
             to store the result
 
 Note:
-	grid and block should be configured as:
-	    dim3 dimGrid((k + BLOCK_SIZE - 1) / BLOCK_SIZE, (m + BLOCK_SIZE - 1) / BLOCK_SIZE);
-	    dim3 dimBlock(BLOCK_SIZE, BLOCK_SIZE);
+    grid and block should be configured as:
+        dim3 dimGrid((k + BLOCK_SIZE - 1) / BLOCK_SIZE, (m + BLOCK_SIZE - 1) / BLOCK_SIZE);
+        dim3 dimBlock(BLOCK_SIZE, BLOCK_SIZE);
 
-	further sppedup can be obtained by using shared memory to decrease global memory access times
+    further sppedup can be obtained by using shared memory to decrease global memory access times
 return: none
 *********************************************************************
 */
@@ -53,7 +53,7 @@ __global__ void gpu_matrix_mult(int *a,int *b, int *c, int m, int n, int k)
 function name: cpu_matrix_mult
 
 description: dot product of two matrix (not only square) in CPU, 
-			 for validating GPU results
+             for validating GPU results
 
 parameters: 
             &a CPU device pointer to a n X n matrix (A)
@@ -61,10 +61,10 @@ parameters:
             &c CPU device output purpose pointer to a n X n matrix (C) 
             to store the result
 Note:
-	grid and block should be configured as:
+    grid and block should be configured as:
 
-	    dim3 dim_grid((n - 1) / BLOCK_SIZE + 1, (n - 1) / BLOCK_SIZE + 1, 1);
-	    dim3 dim_block(BLOCK_SIZE, BLOCK_SIZE, 1);
+        dim3 dim_grid((n - 1) / BLOCK_SIZE + 1, (n - 1) / BLOCK_SIZE + 1, 1);
+        dim3 dim_block(BLOCK_SIZE, BLOCK_SIZE, 1);
 
 return: none
 *********************************************************************
@@ -84,7 +84,7 @@ __global__ void gpu_square_matrix_mult(int *d_a, int *d_b, int *d_result, int n)
         idx = row * n + sub * BLOCK_SIZE + threadIdx.x;
         if(idx >= n*n)
         {
-        	// n may not divisible by BLOCK_SIZE
+            // n may not divisible by BLOCK_SIZE
             tile_a[threadIdx.y][threadIdx.x] = 0;
         }
         else
@@ -150,7 +150,7 @@ __global__ void gpu_matrix_transpose(int* mat_in, int* mat_out, unsigned int row
 function name: cpu_matrix_mult
 
 description: dot product of two matrix (not only square) in CPU, 
-			 for validating GPU results
+             for validating GPU results
 
 parameters: 
             &a CPU host pointer to a m X n matrix (A)
@@ -243,11 +243,11 @@ int main(int argc, char const *argv[])
     // Launch kernel 
     if(m == n && n == k)
     {
-    	gpu_square_matrix_mult<<<dimGrid, dimBlock>>>(d_a, d_b, d_c, n);    
+        gpu_square_matrix_mult<<<dimGrid, dimBlock>>>(d_a, d_b, d_c, n);    
     }
-	else
-	{
-    	gpu_matrix_mult<<<dimGrid, dimBlock>>>(d_a, d_b, d_c, m, n, k);    
+    else
+    {
+        gpu_matrix_mult<<<dimGrid, dimBlock>>>(d_a, d_b, d_c, m, n, k);    
     }
     // Transefr results from device to host 
     cudaMemcpy(h_c, d_c, sizeof(int)*m*k, cudaMemcpyDeviceToHost);
@@ -260,7 +260,7 @@ int main(int argc, char const *argv[])
     cudaEventElapsedTime(&gpu_elapsed_time_ms, start, stop);
     printf("Time elapsed on matrix multiplication of %dx%d . %dx%d on GPU: %f ms.\n\n", m, n, n, k, gpu_elapsed_time_ms);
 
-	// start the CPU version
+    // start the CPU version
     cudaEventRecord(start, 0);
 
     cpu_matrix_mult(h_a, h_b, h_cc, m, n, k);
@@ -292,7 +292,7 @@ int main(int argc, char const *argv[])
     }
     else
     {
-    	printf("incorrect results\n");
+        printf("incorrect results\n");
     }
 
     // free memory
