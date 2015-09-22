@@ -216,6 +216,15 @@ int main(int argc, char const *argv[])
         }
     }
 
+    float gpu_elapsed_time_ms, cpu_elapsed_time_ms;
+
+    // some events to count the execution time
+    cudaEvent_t start, stop;
+    cudaEventCreate(&start);
+    cudaEventCreate(&stop);
+
+    // start to count execution time of GPU version
+    cudaEventRecord(start, 0);
     // Allocate memory space on the device 
     int *d_a, *d_b, *d_c;
     cudaMalloc((void **) &d_a, sizeof(int)*m*n);
@@ -226,21 +235,11 @@ int main(int argc, char const *argv[])
     cudaMemcpy(d_a, h_a, sizeof(int)*m*n, cudaMemcpyHostToDevice);
     cudaMemcpy(d_b, h_b, sizeof(int)*n*k, cudaMemcpyHostToDevice);
 
-	
-    float gpu_elapsed_time_ms, cpu_elapsed_time_ms;
-
-    // some events to count the execution time
-    cudaEvent_t start, stop;
-    cudaEventCreate(&start);
-    cudaEventCreate(&stop);
-
     unsigned int grid_rows = (m + BLOCK_SIZE - 1) / BLOCK_SIZE;
     unsigned int grid_cols = (k + BLOCK_SIZE - 1) / BLOCK_SIZE;
     dim3 dimGrid(grid_cols, grid_rows);
     dim3 dimBlock(BLOCK_SIZE, BLOCK_SIZE);
 
-    // start to count execution time of GPU version
-    cudaEventRecord(start, 0);
     // Launch kernel 
     if(m == n && n == k)
     {
@@ -252,6 +251,7 @@ int main(int argc, char const *argv[])
     }
     // Transefr results from device to host 
     cudaMemcpy(h_c, d_c, sizeof(int)*m*k, cudaMemcpyDeviceToHost);
+    cudaThreadSynchronize();
     // time counting terminate
     cudaEventRecord(stop, 0);
     cudaEventSynchronize(stop);
