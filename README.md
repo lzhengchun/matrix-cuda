@@ -79,6 +79,8 @@ Time elapsed on matrix multiplication of 1024x1024 . 1024x1023 on CPU: 1563.4605
 
 all results are correct!!!, speedup = **29.262594**
 
+So, the openmp version is about 5X faster than single thread version, still far from theoritical (24) 
+
 #todo
 
 (1) further optimization, especially the "computation-to-memory ratio" for non square matrix
