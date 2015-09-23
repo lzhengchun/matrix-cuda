@@ -39,6 +39,46 @@ To increase the "computation-to-memory ratio", the tiled matrix multiplication c
 
 As you can see from the test results, tiled version has a much better sppedup than *gpu_matrix_mult*. 
 
+#comparison with openmp
+
+(Intel(R) Xeon(R) CPU E5645  @ 2.40GHz) X 4 = 24 Cores
+
+[lzhengchun@clus10 liu]$ ./a.out 
+
+please type in m n and k
+
+2300 2300 2300
+
+Time elapsed on matrix multiplication of 2300x2300 . 2300x2300 on GPU: 166.835617 ms.
+
+Time elapsed on matrix multiplication of 2300x2300 . 2300x2300 on CPU: 19520.644531 ms.
+
+all results are correct!!!, speedup = 117.005257
+
+[lzhengchun@clus10 liu]$ ./a.out 
+
+please type in m n and k
+
+1024 1024 1024
+
+Time elapsed on matrix multiplication of 1024x1024 . 1024x1024 on GPU: 15.479232 ms.
+
+Time elapsed on matrix multiplication of 1024x1024 . 1024x1024 on CPU: 2045.946167 ms.
+
+all results are correct!!!, speedup = **132.173630**
+
+[lzhengchun@clus10 liu]$ ./a.out 
+
+please type in m n and k
+
+1024 1024 1023
+
+Time elapsed on matrix multiplication of 1024x1024 . 1024x1023 on GPU: 53.428638 ms.
+
+Time elapsed on matrix multiplication of 1024x1024 . 1024x1023 on CPU: 1563.460571 ms.
+
+all results are correct!!!, speedup = **29.262594**
+
 #todo
 
 (1) further optimization, especially the "computation-to-memory ratio" for non square matrix
