@@ -50,15 +50,15 @@ __global__ void gpu_matrix_mult(int *a,int *b, int *c, int m, int n, int k)
 
 /*
 *********************************************************************
-function name: cpu_matrix_mult
+function name: gpu_square_matrix_mult
 
-description: dot product of two matrix (not only square) in CPU, 
+description: dot product of two matrix (not only square) in GPU, 
              for validating GPU results
 
 parameters: 
-            &a CPU device pointer to a n X n matrix (A)
-            &b CPU device pointer to a n X n matrix (B)
-            &c CPU device output purpose pointer to a n X n matrix (C) 
+            &a GPU device pointer to a n X n matrix (A)
+            &b GPU device pointer to a n X n matrix (B)
+            &c GPU device output purpose pointer to a n X n matrix (C) 
             to store the result
 Note:
     grid and block should be configured as:
