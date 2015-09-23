@@ -52,8 +52,7 @@ __global__ void gpu_matrix_mult(int *a,int *b, int *c, int m, int n, int k)
 *********************************************************************
 function name: gpu_square_matrix_mult
 
-description: dot product of two matrix (not only square) in GPU, 
-             for validating GPU results
+description: dot product of two matrix (not only square) in GPU
 
 parameters: 
             &a GPU device pointer to a n X n matrix (A)
