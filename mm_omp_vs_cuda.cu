@@ -3,7 +3,7 @@
  *
  *  mm_omp_vs_cuda.cu contains the code that realize some common used matrix operations in CUDA, and
  *  an implementation of matrix multiplication speedup via openmp, this is a practice to compare the 
- * of performance of cuda and openmp, as well as a trail of using cuda and openmp in the same program
+ *  of performance of cuda and openmp, as well as a trail of using cuda and openmp in the same program
  *
  *  this is a toy program for learning CUDA, some functions are reusable in other project
  *  note:
