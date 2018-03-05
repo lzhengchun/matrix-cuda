@@ -275,8 +275,8 @@ int main(int argc, char const *argv[])
     {
         for (int j = 0; j < k; ++j)
         {
-            //printf("[%d][%d]:%d == [%d][%d]:%d, ", i, j, h_c[i*k + j], i, j, h_c[i*k + j]);
-            if(h_c[i*k + j] != h_c[i*k + j])
+            //printf("[%d][%d]:%d == [%d][%d]:%d, ", i, j, h_cc[i*k + j], i, j, h_c[i*k + j]);
+            if(h_cc[i*k + j] != h_c[i*k + j])
             {
                 all_ok = 0;
             }
