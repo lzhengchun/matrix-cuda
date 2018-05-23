@@ -234,14 +234,20 @@ int main(int argc, char const *argv[])
     cudaMemcpy(d_a, h_a, sizeof(int)*m*n, cudaMemcpyHostToDevice);
     cudaMemcpy(d_b, h_b, sizeof(int)*n*k, cudaMemcpyHostToDevice);
 
-    unsigned int grid_rows = (m + BLOCK_SIZE - 1) / BLOCK_SIZE;
-    unsigned int grid_cols = (k + BLOCK_SIZE - 1) / BLOCK_SIZE;
-    dim3 dimGrid(grid_cols, grid_rows);
-    dim3 dimBlock(BLOCK_SIZE, BLOCK_SIZE);
-
+   
     // Launch kernel 
     if(m == n && n == k)
     {
+    //unsigned int grid_rows = sqrt(BLOCK_SIZE);
+    //unsigned int grid_cols = m/ grid_rows;
+    
+	//if(size % grid_rows != 0){
+	//grid_cols++;}
+    //dim3 dimGrid(grid_cols, grid_cols,1);
+    //dim3 dimBlock(grid_rows, grid_rows,1);
+                
+                //this is the correct kernal size for different thread sizes..
+
         gpu_square_matrix_mult<<<dimGrid, dimBlock>>>(d_a, d_b, d_c, n);    
     }
     else
